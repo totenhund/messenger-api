@@ -13,5 +13,4 @@ interface UserService {
 
     fun usernameExists(username: String): Boolean
 
-    fun updateUserStatus(currentUser: User, updateDetails: User): User
 }

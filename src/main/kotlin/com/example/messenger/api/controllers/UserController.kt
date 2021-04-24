@@ -5,7 +5,7 @@ import com.example.messenger.api.helpers.objects.UserListVO
 import com.example.messenger.api.helpers.objects.UserVO
 import com.example.messenger.api.models.User
 import com.example.messenger.api.repositories.UserRepository
-import com.example.messenger.api.service.UserService
+import com.example.messenger.api.service.UserServiceImpl
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/users")
-class UserController(val userService: UserService, val userAssembler: UserAssembler, val userRepository: UserRepository) {
+class UserController(val userService: UserServiceImpl, val userAssembler: UserAssembler, val userRepository: UserRepository) {
 
     @PostMapping
     @RequestMapping("/registrations")
@@ -50,7 +50,7 @@ class UserController(val userService: UserService, val userAssembler: UserAssemb
             ResponseEntity<UserVO> {
         val currentUser = userRepository.findByUsername(request.userPrincipal.name)
         userService.updateUserStatus(currentUser as User, updateDetails)
-        return ResponseEntity.ok(currentUser?.let { userAssembler.toUserVO(it) })
+        return ResponseEntity.ok(currentUser.let { userAssembler.toUserVO(it) })
     }
 
 }
