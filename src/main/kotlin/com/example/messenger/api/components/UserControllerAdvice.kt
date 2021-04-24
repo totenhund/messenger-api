@@ -24,7 +24,7 @@ class UserControllerAdvice {
         return ResponseEntity.unprocessableEntity().body(res)
     }
 
-    @ExceptionHandler(InvalidUserIdException::class)
+    @ExceptionHandler(UserStatusEmptyException::class)
     fun statusEmpty(statusEmptyException: UserStatusEmptyException): ResponseEntity<ErrorResponse>{
         val res = ErrorResponse(ResponseConstants.EMPTY_STATUS.value, statusEmptyException.message)
         return ResponseEntity.unprocessableEntity().body(res)

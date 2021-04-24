@@ -6,7 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
-import security.AccountCredentials
+import com.example.messenger.api.security.AccountCredentials
 import java.io.IOException
 import javax.servlet.FilterChain
 import javax.servlet.ServletException

@@ -22,7 +22,7 @@ class User (
 
         @Size(min = 60, max = 60)
         var password: String = "",
-        var status: String = "",
+        var status: String = "available",
         @Pattern(regexp = "\\A(activate|deactivated)\\z")
         var accountStatus: String = "activated",
 

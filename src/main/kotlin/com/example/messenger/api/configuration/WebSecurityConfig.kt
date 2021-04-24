@@ -1,5 +1,6 @@
 package com.example.messenger.api.configuration
 
+
 import com.example.messenger.api.filters.JWTAuthenticationFilter
 import com.example.messenger.api.filters.JWTLoginFilter
 import com.example.messenger.api.service.AppUserDetailsService
@@ -12,28 +13,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-
 import kotlin.jvm.Throws
 
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfig(val userDetailsService: AppUserDetailsService) : WebSecurityConfigurerAdapter() {
+
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users/registrations")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/login")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                //.antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/registrations").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(
-                        JWTLoginFilter("/login",
-                                authenticationManager()),
+                // Filter the /login requests
+                .addFilterBefore(JWTLoginFilter("/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter::class.java)
-                .addFilterBefore(
-                        JWTAuthenticationFilter(),
+                // Filter other requests to check the presence of JWT in header
+                .addFilterBefore(JWTAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter::class.java)
     }
 

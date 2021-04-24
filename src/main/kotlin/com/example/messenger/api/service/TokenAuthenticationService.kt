@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse
 
 internal object TokenAuthenticationService {
 
-    private val TOKEN_EXPIRY: Long = 0
-    private val SECRET = ""
+    private val TOKEN_EXPIRY: Long = 864000000
+    private val SECRET = "$78gr43g7g8feb8we"
     private val TOKEN_PREFIX = "Bearer"
     private val AUTHORIZATION_HEADER_KEY = "Authorization"
 

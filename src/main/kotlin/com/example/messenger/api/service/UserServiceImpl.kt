@@ -27,11 +27,11 @@ class UserServiceImpl(val repository: UserRepository) : UserService {
     }
 
     @Throws(UserStatusEmptyException::class)
-    fun updateUserStatus(currentUser: User, updateDetails: User): User {
+    override fun updateUserStatus(currentUser: User, updateDetails: User): User {
         if (updateDetails.status.isNotEmpty()) {
             currentUser.status = updateDetails.status
             repository.save(currentUser)
-            return currentUser
+            return  currentUser
         }
         throw UserStatusEmptyException()
     }

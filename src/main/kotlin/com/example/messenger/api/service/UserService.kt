@@ -12,4 +12,6 @@ interface UserService {
     fun retrieveUserData(id: Long): User?
 
     fun usernameExists(username: String): Boolean
+
+    fun updateUserStatus(currentUser: User, updateDetails: User): User
 }
